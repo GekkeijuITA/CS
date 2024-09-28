@@ -1,8 +1,54 @@
 \documentclass[12pt, a4paper]{report}
 \usepackage[utf8]{inputenc}
 \input{variables.tex}
+\input{titlePage.tex}
 \preamble
 
 \begin{document}
+\customTitlePage{Computer Security}{2024-2025}
+\newpage
 \tableofcontents
+\chapter{Introduzione}
+\section{Information Security}
+\begin{itemize}
+    \item La sicurezza concerne la protezione degli \textbf{asset} dalle \textbf{minacce (threats)}
+    \item I proprietari (\textbf{owners}) valorizzano i loro asset e vogliono  proteggerli
+    \item I proprietari analizzano le minacce e valutano i rischi. Questo aiuta la selezione di \textbf{contromisure} che riducono le \textbf{vulnerabilità}
+\end{itemize}
+\begin{equation*}
+    Risk_{E} = P(E) \cdot I_{E}
+\end{equation*}
+Dove $E$ è l'evento che rappresenta la minaccia, $P(E)$ è la probabilità che l'evento si verifichi e $I_{E}$ è l'impatto che l'evento ha.
+\begin{equation*}
+    Risk_{Tot} = \sum_{e\in E} (P(e) \cdot I_{e})
+\end{equation*}
+$P(\cdot)$ può essere:
+\begin{itemize}
+    \item 0.7 - 1 : Alta
+    \item 0.4 - 0.7 : Media
+    \item $\leq 0.3$ : Bassa
+\end{itemize}
+\section{Security Properties}
+\begin{itemize}
+    \item Confidentiality: l'informazione non è conosciuta da non autorizzati, bisogna permettere solo a chi ne ha diritto attraverso \textbf{security policies}. Qualche volta si dice \textbf{privacy} per gli individui, \textbf{secrecy} per le organizzazioni, \textbf{anonymity} invece per nascondere l'identità.
+    \item Integrity: l'informazione non deve essere modificata in modo malizioso.
+    \item Authentication: i dati o i servizi devono essere accessibili solo da chi autorizzato. Solitamente il metodo di autenticazione è qualcosa che si ha, qualcosa che si conosce o qualcosa che sei (impronta digitale, firma, biometrica).
+    \item Availability: i dati o i servizi devono esere accessibili e utilizzabili in qualsiasi momento. Questo significa che bisogna prevenire da attacchi DoS (\textbf{Denial of Service})
+    \item Accountability: le azioni sono registrare e rintracciabili dalle parti responsabili.
+\end{itemize}
+\section{Protection Countermeasures}
+\begin{itemize}
+    \item Prevention: prevenire gli attacchi attraverso la progettazione di sistemi e impiegando tecnologie di sicurezza.
+    \item Detection: i metodi principali sono il \textbf{logging} e il \textbf{MACs} (file hash per rilevare alterazioni).
+    \item Response: varia dal ripristinare backup all'informare le autorità competenti o le parti coinvolte.
+    \item Remediation
+\end{itemize}
+\section{Managing security: implementing a solution}
+\begin{itemize}
+    \item Security Analysis: analizza le minacce che potrebbero compromettere l'asset e propone delle politiche e soluzioni a costi appropriati.
+    \item Threat Model: documenta le possibile minacce al sistema, immaginando tutte le possibili vulnerabilità che possono essere sfruttate.
+    \item Risk Assessment: valutazione quantitativa dei rischi.
+    \item Security Policy: per ogni rischio si descrivono le contromisure da adottare.
+    \item Security Solution: progettazione e implementazione delle tecnologie appropriate a costi appropriati.
+\end{itemize}
 \end{document}
