@@ -51,4 +51,80 @@ $P(\cdot)$ può essere:
     \item Security Policy: per ogni rischio si descrivono le contromisure da adottare.
     \item Security Solution: progettazione e implementazione delle tecnologie appropriate a costi appropriati.
 \end{itemize}
+\chapter{Introduzione alla Crittografia}
+\section{Concetti base}
+CIA: Confidentiality, Integrity, Authentication
+\begin{itemize}
+    \item Confidentiality: l'informazioe rimane segreta
+    \item Integrity: l'informazione non è alterata
+    \item Authentication: i principali (Alice e Bob) sanno con chi stanno parlando  
+\end{itemize}
+\begin{itemize}
+    \item Cryptology: lo studio di scritture segrete
+    \item Steganography: la scienza di nascondere un messaggio in un altro messaggio
+    \item Cryptography: la scienza di scrivere in modo segreto
+\end{itemize}
+\section{Schema generale della crittografia}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{Immagini/schemacrittografia.png}
+\end{center}
+Dove $E_{key_{1}}(P)= C$ e $D_{key_{2}}(C) = P$.
+\begin{itemize}
+    \item \textbf{\textcolor{red}{La sicurezza dipende dalla segretezza (secrecy) della chiave non dell'algoritmo}}
+    \item Algoritmi Simmetrici: le due chiavi sono uguali oppure sono facilmente derivabili l'una dall'altra \begin{center}
+        \includegraphics[width=0.45\textwidth]{Immagini/chiavesimmetrica.png}
+    \end{center}
+    Dove nel canale sicuro si invia la chiave e $\hat{X}$ è parte del messaggio decriptato e $\hat{K}$ è parte della chiave decriptata.
+    \item Algoritmi Asimmetrici: le due chiavi sono diverse e non è possibile derivare una dall'altra e una chiave pubblica (\textbf{public key}) può essere distribuita senza compromettere le chiavi private (\textbf{private key})
+    \item Quando si costruisce un sistema crittografico bisogna presumere che l'algoritmo sia conosciuto, quindi la sicurezza dipende dalla chiave
+\end{itemize}
+\section{Classificazione della sicurezza}
+\begin{itemize}
+    \item \textbf{Unconditional Security}: il sistema è sicuro anche se l'avversario ha potenza computazionale illimitata. La sicurezza è misurata in termini di teoria dell'informazione (information theory).
+    \item \textbf{Conditional Security}: il sistema può essere violato se l'avversario ha abbastanza potenza computazionale. La sicurezza è misurata in termini di teoria della complessità (complexity theory).
+\end{itemize}
+\section{Criptoanalisi}
+E' la scienza del recuperare il messaggio originale da quello criptato senza la chiave. L'obiettivo non è solo quello di recuperare il messaggio ma anche la chiave.
+\subsection{Brute-force attack}
+\begin{itemize}
+    \item E' sempre possibile: basta provare tutte le chiavi, solitamente sono $2^{\#bit}$ chiavi possibili se sono caratteri invece è una permutazione di $n!$ chiavi possibili.
+    \item Costa molto, dipende dalla dimensione della chiave
+    \item Presume che il messaggio decifrato sia conociuto o riconoscibile
+\end{itemize}
+\subsection{Tipi di attacco}
+\begin{itemize}
+    \item \textbf{Ciphertext only}: l'aavversario conosce il testo cifrato e prova a dedurne la chiave
+    \item \textbf{Known plaintext}: rispetto a ciphertext only, l'avversario conosce anche il testo decifrato
+    \item \textbf{Chosen plaintext}: come sopra ma l'avversario può scegliere il testo cifrato
+    \item \textbf{Adaptive chosen plaintext}: può, non solo scegliere il testo decifrato, ma può modificare il testo decifrato in base ai risultati della cifratura
+    \item \textbf{Chosen ciphertext}: l'avversario può scegliere il testo cifrato e vedere il testo decifrato
+\end{itemize}
+\section{Matematicamente}
+\begin{itemize}
+    \item $\mathcal{A}$ è l'alfabeto, un insieme finito
+    \item $\mathcal{M}\subseteq \mathcal{A}^{*}$ è lo spazio dei messaggi. $M\in \mathcal{M}$ è un messaggio in chiaro
+    \item $\mathcal{C}$ è lo spazio dei testi cifrati, il cui alfabeto può essere diverso da quello di $\mathcal{M}$
+    \item $\mathcal{K}$ denota l'insieme delle chiavi
+    \item $e \in \mathcal{K}$ deterima una funzione biettiva $e: \mathcal{M} \rightarrow \mathcal{C}$, la funzione di cifratura è denotata da $E_{e}$
+    \item $\forall d \in \mathcal{K}, D_{d}: \mathcal{C} \rightarrow \mathcal{M}$, la funzione di decifratura è denotata da $D_{d}$ ed è biettiva
+    \item $D_{d}(E_{e}(M)) = E^{-1}_{e}(M) = M$
+\end{itemize}
+\section{Cifrari a blocchi, a flusso e a codici}
+\begin{itemize}
+    \item \textbf{Block cipher}: è uno schema di cifratura che divide il messaggio in blocchi di lunghezza fissa $t$ e cifra ogni blocco separatamente.
+    \item \textbf{Stream cipher}: è uno schema di cifratura dove il blocco è di lunghezza 1 (un bit alla volta)
+    \item \textbf{Code}: è uno schema di cifratura dove il messaggio è cifrato in blocchi di lunghezza variabile
+\end{itemize}
+\section{Cifrari a sostituzione}
+\begin{itemize}
+    \item \textbf{Cifrario di Cesare}: ogni carattere del messaggio in chiaro viene sostituito dal carattere $n$ a destra modulo 26 (26! possibili chiavi, molto poco sicuro)
+    \item \textbf{ROT13}: è un cifrario di Cesare con $n=13$
+    \item \textbf{Alfanumerico}: si sostituisce ogni carattere con un numero
+\end{itemize}
+\subsection{Esempio: Cifrario affine}
+\begin{itemize}
+    \item E' una sostituzione monoalfabetica tale che $E(m)=(a\cdot m+b) \mod |\mathcal{A}|$ dove a,b sono interi positivi e sono chiave del cifrario
+    \item Per essere invertibile $a$ deve essere coprimo con $|\mathcal{A}|$
+    \item La decifratura è $D(c) = a^{-1}(c-b) \mod |\mathcal{A}|$ dove $1 = a\cdot a^{-1}\mod |\mathcal{A}|$
+\end{itemize}
 \end{document}
