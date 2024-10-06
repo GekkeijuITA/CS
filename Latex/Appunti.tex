@@ -127,4 +127,31 @@ E' la scienza del recuperare il messaggio originale da quello criptato senza la 
     \item Per essere invertibile $a$ deve essere coprimo con $|\mathcal{A}|$
     \item La decifratura è $D(c) = a^{-1}(c-b) \mod |\mathcal{A}|$ dove $1 = a\cdot a^{-1}\mod |\mathcal{A}|$
 \end{itemize}
+\subsection{Cifrario a sostituzione omofono}
+Sostituisce ogni lettera $a$ con una stringa scelta a caso da $H(a)$. Per decifrare una stringa $c$ di $t$ simboli, bisogna determinare $a$ tale che $H(a)=c$. La chiave del cifrario è la funzione $H$.
+\subsubsection{Esempio}
+\begin{itemize}
+    \item $H(A)=\{1,2\}$
+    \item $H(B)=\{3,4\}$
+    \item $H(C)=\{5,6\}$
+\end{itemize}
+ABC $\rightarrow$ 135 oppure 246 oppure 145 ecc.
+\subsection{Cifrario a sostituzione polialfabetica}
+E' un cifrario a blocchi con lunghezza t sull'alfabeto A
+\subsection{One-time pads (cifrario di Vernam)}
+E' un cifrario a flusso definito sull'alfabeto $\mathcal{A}=\{0,1\}$  il messaggio è cifrato scegliendo casualmente una chiave $k$ binaria di lunghezza uguale al messaggio $m$ e facendo $c=m\oplus k$ dove $\oplus$ è l'operazione di XOR, $d=c\oplus k$ è la decifratura.\\
+\underline{Le chiavi non vanno mai riutilizzate}.\\
+La funzione di cifratura $E(K,M)$ è \textbf{malleabile} se e solo se
+\begin{equation*}
+    F(E(K,M)) = E(K,G(M)) \quad\forall K,M
+\end{equation*}
+\subsubsection{Esempio}
+La funzione $E(K,M)=K\oplus M$ è chiaramente malleabile. Se $F(X)=G(X)=N\oplus X$
+\begin{equation*}
+    F(E(K,M)) = N\oplus (K\oplus M) = K \oplus (N\oplus M) = E(K,N\oplus M) = E(K,G(M))
+\end{equation*}
+\subsection{Cifrario a trasposizione}
+E' un cifrario che "mischia" (permutazione) le lettere del messaggio senza cambiarne il significato (delle lettere) (es. CIAO $\rightarrow$ OICA) per decifrare bisogna eseguire l'operazione inversa della permutazione.
+\subsection{Cifrario composito}
+I cifrari basati su sostituzione e trasposizione non sono sicuri però possono essere combinati, è difficile farlo "a mano" infatti sono state inventate le macchine cifranti.
 \end{document}
