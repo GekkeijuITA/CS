@@ -155,6 +155,19 @@ E' un cifrario che "mischia" (permutazione) le lettere del messaggio senza cambi
 \subsection{Cifrario composito}
 I cifrari basati su sostituzione e trasposizione non sono sicuri però possono essere combinati, è difficile farlo "a mano" infatti sono state inventate le macchine cifranti.
 \chapter{Crittografia simmetrica}
+\section{Cifrario Feistel}
+\begin{center}
+    \includegraphics[width=\textwidth]{Immagini/feistelc.png}
+\end{center}
+$F$ è la funzione di cifratura, lavora sempre con il blocco sinistro del messaggio ed esegue lo \texttt{XOR}.\\
+La struttura della cifratura e deicfratura è la stessa, la differenze è che le sotto-chiavi usate durante la cifratura a ogni round sono usate in ordine inverso durante la decifratura.
+\begin{center}
+    \includegraphics[width=\textwidth]{Immagini/feisteld.png}
+\end{center}
+\begin{equation*}
+    R_{r}\oplus L_{r-1} = F(k_{r},R_{r-1})
+\end{equation*}
+\chapter{Crittografia simmetrica}
 \chapter{Message auth \& Digital signature}
 \chapter{Public key cryptography}
 \chapter{Security protocols}
