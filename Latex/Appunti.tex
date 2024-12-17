@@ -8,168 +8,64 @@
 \customTitlePage{Computer Security}{2024-2025}
 \newpage
 \tableofcontents
-\chapter{Introduzione}
-\section{Information Security}
+\chapter{Introduction}
+Computer security deals with the preventon and detection of unauthorized actions by users of a computer system.
 \begin{itemize}
-    \item La sicurezza concerne la protezione degli \textbf{asset} dalle \textbf{minacce (threats)}
-    \item I proprietari (\textbf{owners}) valorizzano i loro asset e vogliono  proteggerli
-    \item I proprietari analizzano le minacce e valutano i rischi. Questo aiuta la selezione di \textbf{contromisure} che riducono le \textbf{vulnerabilità}
+    \item \textbf{Authorization} is central to definition
+    \item Sensible only relative to a security policy, stating who (or what) may perform which actions
+\end{itemize}
+\section{Information Security}
+Is even more general. It deals with information independent of computer security.
+\subsection{Key Concepts}
+\begin{itemize}
+    \item Security concerns the protection of assets from threats
+    \item Owners value their assets and want to protect them
+    \item Threat agents also value assets, and seek to abuse them
+    \item Owners analyse threats to determine which ones apply; these are the risks that can be costed. This helps the selection of countermeasures, which reduce the vulnerabilities (may remain leaving some residual risk, owners seek to minimise that risk)
 \end{itemize}
 \begin{equation*}
-    Risk_{E} = P(E) \cdot I_{E}
+    \text{Risk}_{E} = \text{Pr}_{E} \cdot \text{I}_{E}
 \end{equation*}
-Dove $E$ è l'evento che rappresenta la minaccia, $P(E)$ è la probabilità che l'evento si verifichi e $I_{E}$ è l'impatto che l'evento ha.
-\begin{equation*}
-    Risk_{Tot} = \sum_{e\in E} (P(e) \cdot I_{e})
-\end{equation*}
-$P(\cdot)$ può essere:
+where $\text{Pr}_{E}$ is the probability of an event $E$ and $\text{I}_{E}$ is the impact of the event $E$.
+\section{Protection countermeasures}
 \begin{itemize}
-    \item 0.7 - 1 : Alta
-    \item 0.4 - 0.7 : Media
-    \item $\leq 0.3$ : Bassa
+    \item \textbf{Prevention}: try to prevent security breaches by system design and employing appropriate security technologies as defences
+    \item \textbf{Detection}: in the event of a security breach, we try to ensure that it will be detected. Logging and MACs (file hashes to detect alteration)  are primary methods of detection, although intrusion detection systems which activelyy watch for intruders are more common
+    \item \textbf{Response}: in the event of a security breach, we must respond or recover the assets. Responses range from restoring backups through to informing appopriate concerned parties or law-enforcement agencies
 \end{itemize}
 \section{Security Properties}
+\subsection{Confidentiality}
+\customfbox{Information is not learned by unauthorized principals}
+Confidentiality is sometimes characterised as the unauthorized reading of data, when considering \textbf{access control} measures. But in general we are concerned with unauthorized learning of information, which is more subtle to contend with. Confidentiality presumes a security policy saying who or what can access our data. The security policy is used for access control.
 \begin{itemize}
-    \item Confidentiality: l'informazione non è conosciuta da non autorizzati, bisogna permettere solo a chi ne ha diritto attraverso \textbf{security policies}. Qualche volta si dice \textbf{privacy} per gli individui, \textbf{secrecy} per le organizzazioni, \textbf{anonymity} invece per nascondere l'identità.
-    \item Integrity: l'informazione non deve essere modificata in modo malizioso.
-    \item Authentication: i dati o i servizi devono essere accessibili solo da chi autorizzato. Solitamente il metodo di autenticazione è qualcosa che si ha, qualcosa che si conosce o qualcosa che sei (impronta digitale, firma, biometrica).
-    \item Availability: i dati o i servizi devono esere accessibili e utilizzabili in qualsiasi momento. Questo significa che bisogna prevenire da attacchi DoS (\textbf{Denial of Service})
-    \item Accountability: le azioni sono registrare e rintracciabili dalle parti responsabili.
+    \item \textbf{Privacy}: confidentiality for individuals
+    \item \textbf{Secrecy}: confidentiality for organizations
+    \item \textbf{Anonymity}: keeping one's identity private
 \end{itemize}
-\section{Protection Countermeasures}
+\subsection{Integrity}
+\customfbox{Data has not been maliciously altered}
+Intergrity has more general meanings elsewhere, but in computer security we are concerned with preventing the possibly malicious alteration of data, by someone who is not authorized to do so. Integrity in this sense can be characterised as the unauthorized writing of data. Again, this presumes a security policy saying who or what is allowed to alter the data.
+\subsection{Authenticity}
+\customfbox{Data or services available only to authorized identities}
+Authentication is th processo of verification of identity of a person or system. Some form of authentication is a pre-requisite if we wish to allow access to services or data to some people but deny access to others, using an access control system. Methods for authentication are often characterised as:
 \begin{itemize}
-    \item Prevention: prevenire gli attacchi attraverso la progettazione di sistemi e impiegando tecnologie di sicurezza.
-    \item Detection: i metodi principali sono il \textbf{logging} e il \textbf{MACs} (file hash per rilevare alterazioni).
-    \item Response: varia dal ripristinare backup all'informare le autorità competenti o le parti coinvolte.
-    \item Remediation
+    \item something you have
+    \item something you know
+    \item something you are
 \end{itemize}
-\section{Managing security: implementing a solution}
+Also, where you are may be implicity or explicity checked. Several methods can be combined for extra security.
+\subsection{Availability}
+\customfbox{Data or services can be accessed in a reliable and timely way}
+Threats to availability cover many kinds of external environmental events as well as accidental or malicious attackks in software. In computer security we're concerned with protecting against the second kind of threat, rather than providing more general forms of fault-tolerance or dependability assurance. Ensuring availability means preventing \textbf{denial od service} (DoS) attacks, insofar as this is possible. It's possible to fix attacks on faulty protocols, but attacks exhausting available resources are harder, since it can  be tricky to distinguish between an attack and a  legitimate use of service.
+\subsection{Accountability}
+\customfbox{Actions are recorded and can be traced to the party responsible}
+If prevention methods and access controls fail, we may fall back to detection: keeping  a secure audit trail is important so that actions affecting security can be traced back to the responsible party. A stronger form of accountability is non-repudation, when a party cannot later deny some action. Creating an audit trail with machine logs is a tricky problem: if a system is compromised, the logs may also be tampered with. Ways around that problem are to send log messages to an append-only file, a separate server, or even a physically isolated printer.
+\section{Implementing a security solution}
 \begin{itemize}
-    \item Security Analysis: analizza le minacce che potrebbero compromettere l'asset e propone delle politiche e soluzioni a costi appropriati.
-    \item Threat Model: documenta le possibile minacce al sistema, immaginando tutte le possibili vulnerabilità che possono essere sfruttate.
-    \item Risk Assessment: valutazione quantitativa dei rischi.
-    \item Security Policy: per ogni rischio si descrivono le contromisure da adottare.
-    \item Security Solution: progettazione e implementazione delle tecnologie appropriate a costi appropriati.
+    \item A \textbf{security analysis} surveys the threats which pose risks to assets, and then proposes policy and solutions at an appropriate cost.
+    \item A \textbf{threat model} documents the possible threats to a system, imagining all the vulnerabilities which might be exploited
+    \item A \textbf{riks assessment} studies the likelihood of each threat in the system environment and assigns a cost value, to find the risks
+    \item A \textbf{security policy} addresses the threats, and describes a coherent set of countermeasures
 \end{itemize}
-\chapter{Introduzione alla Crittografia}
-\section{Concetti base}
-CIA: Confidentiality, Integrity, Authentication
-\begin{itemize}
-    \item Confidentiality: l'informazioe rimane segreta
-    \item Integrity: l'informazione non è alterata
-    \item Authentication: i principali (Alice e Bob) sanno con chi stanno parlando  
-\end{itemize}
-\begin{itemize}
-    \item Cryptology: lo studio di scritture segrete
-    \item Steganography: la scienza di nascondere un messaggio in un altro messaggio
-    \item Cryptography: la scienza di scrivere in modo segreto
-\end{itemize}
-\section{Schema generale della crittografia}
-\begin{center}
-    \includegraphics[width=0.5\textwidth]{Immagini/schemacrittografia.png}
-\end{center}
-Dove $E_{key_{1}}(P)= C$ e $D_{key_{2}}(C) = P$.
-\begin{itemize}
-    \item \textbf{\textcolor{red}{La sicurezza dipende dalla segretezza (secrecy) della chiave non dell'algoritmo}}
-    \item Algoritmi Simmetrici: le due chiavi sono uguali oppure sono facilmente derivabili l'una dall'altra \begin{center}
-        \includegraphics[width=0.45\textwidth]{Immagini/chiavesimmetrica.png}
-    \end{center}
-    Dove nel canale sicuro si invia la chiave e $\hat{X}$ è parte del messaggio decriptato e $\hat{K}$ è parte della chiave decriptata.
-    \item Algoritmi Asimmetrici: le due chiavi sono diverse e non è possibile derivare una dall'altra e una chiave pubblica (\textbf{public key}) può essere distribuita senza compromettere le chiavi private (\textbf{private key})
-    \item Quando si costruisce un sistema crittografico bisogna presumere che l'algoritmo sia conosciuto, quindi la sicurezza dipende dalla chiave
-\end{itemize}
-\section{Classificazione della sicurezza}
-\begin{itemize}
-    \item \textbf{Unconditional Security}: il sistema è sicuro anche se l'avversario ha potenza computazionale illimitata. La sicurezza è misurata in termini di teoria dell'informazione (information theory).
-    \item \textbf{Conditional Security}: il sistema può essere violato se l'avversario ha abbastanza potenza computazionale. La sicurezza è misurata in termini di teoria della complessità (complexity theory).
-\end{itemize}
-\section{Criptoanalisi}
-E' la scienza del recuperare il messaggio originale da quello criptato senza la chiave. L'obiettivo non è solo quello di recuperare il messaggio ma anche la chiave.
-\subsection{Brute-force attack}
-\begin{itemize}
-    \item E' sempre possibile: basta provare tutte le chiavi, solitamente sono $2^{\#bit}$ chiavi possibili se sono caratteri invece è una permutazione di $n!$ chiavi possibili.
-    \item Costa molto, dipende dalla dimensione della chiave
-    \item Presume che il messaggio decifrato sia conociuto o riconoscibile
-\end{itemize}
-\subsection{Tipi di attacco}
-\begin{itemize}
-    \item \textbf{Ciphertext only}: l'aavversario conosce il testo cifrato e prova a dedurne la chiave
-    \item \textbf{Known plaintext}: rispetto a ciphertext only, l'avversario conosce anche il testo decifrato
-    \item \textbf{Chosen plaintext}: come sopra ma l'avversario può scegliere il testo cifrato
-    \item \textbf{Adaptive chosen plaintext}: può, non solo scegliere il testo decifrato, ma può modificare il testo decifrato in base ai risultati della cifratura
-    \item \textbf{Chosen ciphertext}: l'avversario può scegliere il testo cifrato e vedere il testo decifrato
-\end{itemize}
-\section{Matematicamente}
-\begin{itemize}
-    \item $\mathcal{A}$ è l'alfabeto, un insieme finito
-    \item $\mathcal{M}\subseteq \mathcal{A}^{*}$ è lo spazio dei messaggi. $M\in \mathcal{M}$ è un messaggio in chiaro
-    \item $\mathcal{C}$ è lo spazio dei testi cifrati, il cui alfabeto può essere diverso da quello di $\mathcal{M}$
-    \item $\mathcal{K}$ denota l'insieme delle chiavi
-    \item $e \in \mathcal{K}$ deterima una funzione biettiva $e: \mathcal{M} \rightarrow \mathcal{C}$, la funzione di cifratura è denotata da $E_{e}$
-    \item $\forall d \in \mathcal{K}, D_{d}: \mathcal{C} \rightarrow \mathcal{M}$, la funzione di decifratura è denotata da $D_{d}$ ed è biettiva
-    \item $D_{d}(E_{e}(M)) = E^{-1}_{e}(M) = M$
-\end{itemize}
-\section{Cifrari a blocchi, a flusso e a codici}
-\begin{itemize}
-    \item \textbf{Block cipher}: è uno schema di cifratura che divide il messaggio in blocchi di lunghezza fissa $t$ e cifra ogni blocco separatamente.
-    \item \textbf{Stream cipher}: è uno schema di cifratura dove il blocco è di lunghezza 1 (un bit alla volta)
-    \item \textbf{Code}: è uno schema di cifratura dove il messaggio è cifrato in blocchi di lunghezza variabile
-\end{itemize}
-\section{Cifrari a sostituzione}
-\begin{itemize}
-    \item \textbf{Cifrario di Cesare}: ogni carattere del messaggio in chiaro viene sostituito dal carattere $n$ a destra modulo 26 (26! possibili chiavi, molto poco sicuro)
-    \item \textbf{ROT13}: è un cifrario di Cesare con $n=13$
-    \item \textbf{Alfanumerico}: si sostituisce ogni carattere con un numero
-\end{itemize}
-\subsection{Esempio: Cifrario affine}
-\begin{itemize}
-    \item E' una sostituzione monoalfabetica tale che $E(m)=(a\cdot m+b) \mod |\mathcal{A}|$ dove a,b sono interi positivi e sono chiave del cifrario
-    \item Per essere invertibile $a$ deve essere coprimo con $|\mathcal{A}|$
-    \item La decifratura è $D(c) = a^{-1}(c-b) \mod |\mathcal{A}|$ dove $1 = a\cdot a^{-1}\mod |\mathcal{A}|$
-\end{itemize}
-\subsection{Cifrario a sostituzione omofono}
-Sostituisce ogni lettera $a$ con una stringa scelta a caso da $H(a)$. Per decifrare una stringa $c$ di $t$ simboli, bisogna determinare $a$ tale che $H(a)=c$. La chiave del cifrario è la funzione $H$.
-\subsubsection{Esempio}
-\begin{itemize}
-    \item $H(A)=\{1,2\}$
-    \item $H(B)=\{3,4\}$
-    \item $H(C)=\{5,6\}$
-\end{itemize}
-ABC $\rightarrow$ 135 oppure 246 oppure 145 ecc.
-\subsection{Cifrario a sostituzione polialfabetica}
-E' un cifrario a blocchi con lunghezza t sull'alfabeto A
-\subsection{One-time pads (cifrario di Vernam)}
-E' un cifrario a flusso definito sull'alfabeto $\mathcal{A}=\{0,1\}$  il messaggio è cifrato scegliendo casualmente una chiave $k$ binaria di lunghezza uguale al messaggio $m$ e facendo $c=m\oplus k$ dove $\oplus$ è l'operazione di XOR, $d=c\oplus k$ è la decifratura.\\
-\underline{Le chiavi non vanno mai riutilizzate}.\\
-La funzione di cifratura $E(K,M)$ è \textbf{malleabile} se e solo se
-\begin{equation*}
-    F(E(K,M)) = E(K,G(M)) \quad\forall K,M
-\end{equation*}
-\subsubsection{Esempio}
-La funzione $E(K,M)=K\oplus M$ è chiaramente malleabile. Se $F(X)=G(X)=N\oplus X$
-\begin{equation*}
-    F(E(K,M)) = N\oplus (K\oplus M) = K \oplus (N\oplus M) = E(K,N\oplus M) = E(K,G(M))
-\end{equation*}
-\subsection{Cifrario a trasposizione}
-E' un cifrario che "mischia" (permutazione) le lettere del messaggio senza cambiarne il significato (delle lettere) (es. CIAO $\rightarrow$ OICA) per decifrare bisogna eseguire l'operazione inversa della permutazione.
-\subsection{Cifrario composito}
-I cifrari basati su sostituzione e trasposizione non sono sicuri però possono essere combinati, è difficile farlo "a mano" infatti sono state inventate le macchine cifranti.
-\chapter{Crittografia simmetrica}
-\section{Cifrario Feistel}
-\begin{center}
-    \includegraphics[width=\textwidth]{Immagini/feistelc.png}
-\end{center}
-$F$ è la funzione di cifratura, lavora sempre con il blocco sinistro del messaggio ed esegue lo \texttt{XOR}.\\
-La struttura della cifratura e deicfratura è la stessa, la differenze è che le sotto-chiavi usate durante la cifratura a ogni round sono usate in ordine inverso durante la decifratura.
-\begin{center}
-    \includegraphics[width=\textwidth]{Immagini/feisteld.png}
-\end{center}
-\begin{equation*}
-    R_{r}\oplus L_{r-1} = F(k_{r},R_{r-1})
-\end{equation*}
-\chapter{Crittografia simmetrica}
-\chapter{Message auth \& Digital signature}
-\chapter{Public key cryptography}
-\chapter{Security protocols}
-\chapter{Web security}
+The costs of countermeasures is compared against the risks, and juggles to make a sensible trade-off. This allows a security solution to be designed, deploying appropriate technologies at an appropriate cost. Partly this is a budgeting exercise; but it's also important to spend effort in the right place.
 \end{document}

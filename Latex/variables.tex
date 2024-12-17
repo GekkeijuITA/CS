@@ -1,5 +1,5 @@
 \newcommand\preamble{
-    \usepackage[italian]{babel}
+    \usepackage[english]{babel}
     \usepackage{geometry}
     \usepackage{amsmath}
     \usepackage{amssymb}
@@ -10,4 +10,10 @@
     \usepackage{xcolor}
     \let\olditemize\itemize
     \renewcommand\itemize{\olditemize\setlength\itemsep{0em}}
+}
+
+\newcommand{\customfbox}[1]{
+    \begin{center}
+        \fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\centering #1}}
+    \end{center}
 }
